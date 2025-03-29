@@ -1,22 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-
+<style>
+    .btn1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 8rem;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        height: 3rem;
+        background-size: 300% 300%;
+        cursor: pointer;
+        backdrop-filter: blur(1rem);
+        border-radius: 5rem;
+        transition: 0.5s;
+        animation: gradient_301 5s ease infinite;
+        border: double 4px transparent;
+        background-image: linear-gradient(#212121, #212121),
+        linear-gradient(
+            137.48deg,
+            #ffdb3b 10%,
+            #fe53bb 45%,
+            #8f51ea 67%,
+            #0044ff 87%
+        );
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+    }
+    
+    #container-stars {
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        transition: 0.5s;
+        backdrop-filter: blur(1rem);
+        border-radius: 5rem;
+    }
+    
+    strong {
+        z-index: 2;
+        font-family: "Avalors Personal Use";
+        font-size: 12px;
+        letter-spacing: 5px;
+        color: #ffffff;
+        text-shadow: 0 0 4px white;
+    }
+    
+    #glow {
+        position: absolute;
+        display: flex;
+        width: 12rem;
+    }
+    
+    .circle {
+        width: 100%;
+        height: 30px;
+        filter: blur(2rem);
+        animation: pulse_3011 4s infinite;
+        z-index: -1;
+    }
+    
+    .circle:nth-of-type(1) {
+        background: rgba(254, 83, 186, 0.636);
+    }
+    
+    .circle:nth-of-type(2) {
+        background: rgba(142, 81, 234, 0.704);
+    }
+    
+    .btn1:hover #container-stars {
+        z-index: 1;
+        background-color: #212121;
+    }
+    
+    .btn1:hover {
+        transform: scale(1.1);
+    }
+    
+    .btn1:active {
+        border: double 4px #fe53bb;
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        animation: none;
+    }
+    
+    .btn1:active .circle {
+        background: #fe53bb;
+    }
+    
+    #stars {
+        position: relative;
+        background: transparent;
+        width: 200rem;
+        height: 200rem;
+    }
+    
+    #stars::after {
+        content: "";
+        position: absolute;
+        top: -10rem;
+        left: -100rem;
+        width: 100%;
+        height: 100%;
+        animation: animStarRotate 90s linear infinite;
+    }
+    
+    #stars::after {
+        background-image: radial-gradient(#ffffff 1px, transparent 1%);
+        background-size: 50px 50px;
+    }
+    
+    #stars::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -50%;
+        width: 170%;
+        height: 500%;
+        animation: animStar 60s linear infinite;
+    }
+    
+    #stars::before {
+        background-image: radial-gradient(#ffffff 1px, transparent 1%);
+        background-size: 50px 50px;
+        opacity: 0.5;
+    }
+    
+    @keyframes animStar {
+        from {
+        transform: translateY(0);
+        }
+    
+        to {
+        transform: translateY(-135rem);
+        }
+    }
+    
+    @keyframes animStarRotate {
+        from {
+        transform: rotate(360deg);
+        }
+    
+        to {
+        transform: rotate(0);
+        }
+    }
+    
+    @keyframes gradient_301 {
+        0% {
+        background-position: 0% 50%;
+        }
+    
+        50% {
+        background-position: 100% 50%;
+        }
+    
+        100% {
+        background-position: 0% 50%;
+        }
+    }
+    
+    @keyframes pulse_3011 {
+        0% {
+        transform: scale(0.75);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+        }
+    
+        70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        }
+    
+        100% {
+        transform: scale(0.75);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+    }  
+</style>
 <body>
     <div class="container-fluid py-2">
-        <div class="container bg-primary text-light rounded-2 py-4">
-            <h2 class="text-uppercase fw-bold text-center">All Courses</h2>
-        </div>
-        <div class="container px-0 py-4 d-flex justify-content-between">
-            <button type="button" id="btn" class="btn btn-outline-secondary">Show</button>
-            <button type="button" id="btn1" class="btn btn-outline-secondary">Hide</button>
+        <nav class="container navbar py-2 navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid bg-primary py-2 rounded-2">
+              <a class="navbar-brand text-uppercase fw-bold" href="#">All courses</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active text-uppercase" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active text-uppercase" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active text-uppercase" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-dark" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+          <div class="container d-flex justify-content-between">
+            <button type="button" id="btn1" class="btn1">
+                <strong>Show</strong>
+                <div id="container-stars">
+                  <div id="stars"></div>
+                </div>
+              
+                <div id="glow">
+                  <div class="circle"></div>
+                  <div class="circle"></div>
+                </div>
+            </button>
+            <button type="button" id="btn2" class="btn1">
+                <strong>Hide</strong>
+                <div id="container-stars">
+                  <div id="stars"></div>
+                </div>
+              
+                <div id="glow">
+                  <div class="circle"></div>
+                  <div class="circle"></div>
+                </div>
+            </button>              
         </div>
         <div class="container ">
             <div class="row g-5" id="show">
@@ -25,59 +244,60 @@
         </div>
     </div>
 </body>
-<Script>
+<script>
     const courses = [
-        {
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/768px-Python-logo-notext.svg.png",
-            title: "Python Logo",
-            details: "The official logo for the Python programming language. It features two intertwined snakes, one blue and one yellow, forming a circular shape. Python is a high-level, interpreted, general-purpose programming language known for its readability and versatility in web development, data science, and more."
-        },
-        {
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/C_Programming_Language.svg/681px-C_Programming_Language.svg.png",
-            title: "C Programming Language Logo",
-            details: "The logo representing the C programming language. It's a simple, stylized letter 'C' often depicted in blue. C is a powerful and foundational programming language used extensively in system programming, embedded systems, and game development due to its efficiency and low-level control."
-        },
-        {
-            image: "https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png",
-            title: "JavaScript Logo",
-            details: "A widely recognized logo for JavaScript. It's a yellow badge with the stylized letters 'JS' in black. JavaScript is an essential scripting language for web development, enabling interactive and dynamic content on websites. It's also used in server-side environments (Node.js) and mobile app development."
-        },
-        {
-            image: "https://imgs.search.brave.com/qR255R_pMbMeR6A80wBdQ2ZX6j7G8XMmdnaehdEOcAo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/d2lrLmNvbS9jb250/ZW50L3VwbG9hZHMv/aW1hZ2VzLzczMV9q/YXZhLmpwZw",
-            title: "Java Logo",
-            details: "The official logo for the Java programming language, featuring a stylized coffee cup with rising steam, often in shades of blue and orange. Java is a class-based, object-oriented programming language designed to have as few implementation dependencies as possible, making it platform-independent."
-        },
-        {
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1200px-Go_Logo_Blue.svg.png",
-            title: "Go Logo",
-            details: "The logo for the Go programming language (also known as Golang). It's a simple and modern design featuring the word 'Go' in a clean, sans-serif blue font with stylized streaks suggesting speed and efficiency. Go is a statically typed, compiled language designed at Google for building scalable and performant software."
-        },
-        {
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/800px-PHP-logo.svg.png",
-            title: "PHP Logo",
-            details: "The logo for PHP: Hypertext Preprocessor. It's a stylized wordmark 'php' often enclosed in a rounded rectangle and typically in shades of purple and blue. PHP is a widely-used open-source scripting language especially suited for web development and can be embedded into HTML."
-        },
-        {
-            image: "https://imgs.search.brave.com/I_i66vdON1X4A3dmdmYi1BRKNQ86bOBXy_y1yrPJ6mU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy9i/L2JkL0xvZ29fQ19z/aGFycC5zdmc",
-            title: "C# Logo (.NET)",
-            details: "The logo for the .NET platform, which is heavily associated with the C# programming language. It features a stylized purple square with rounded corners and a white dot in the center connected by a line. C# is a modern, object-oriented programming ."
-        },
-        {
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/800px-Tux.png",
-            title: "Linux Logo (Tux)",
-            details: "While not strictly a programming language, Tux is the official mascot of the Linux kernel. This friendly penguin is widely recognized in the open-source community and often associated with development on Linux platforms, which are popular for various."
-        },
-        {
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/512px-.NET_Core_Logo.svg.png",
-            title: ".NET Logo (Platform)",
-            details: "The logo for the .NET development platform (formerly .NET Core). It's a stylized purple square with rounded corners and a white dot in the center connected by a line. .NET is a free, cross-platform, open-source developer platform for building many ."
-        }
-    ];
-    let btn = document.getElementById("btn");
-    let btn1 = document.getElementById("btn1");
-    let show = document.getElementById("show");
-    let output = "";
-    btn.onclick=()=>{
+    {
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/768px-Python-logo-notext.svg.png",
+        title: "Python Logo",
+        details: "The official logo for the Python programming language. It features two intertwined snakes, one blue and one yellow, forming a circular shape. Python is a high-level, interpreted, general-purpose programming language known for its readability and versatility in web development, data science, and more."
+    },
+    {
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/C_Programming_Language.svg/681px-C_Programming_Language.svg.png",
+        title: "C Programming Language Logo",
+        details: "The logo representing the C programming language. It's a simple, stylized letter 'C' often depicted in blue. C is a powerful and foundational programming language used extensively in system programming, embedded systems, and game development due to its efficiency and low-level control."
+    },
+    {
+        image: "https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png",
+        title: "JavaScript Logo",
+        details: "A widely recognized logo for JavaScript. It's a yellow badge with the stylized letters 'JS' in black. JavaScript is an essential scripting language for web development, enabling interactive and dynamic content on websites. It's also used in server-side environments (Node.js) and mobile app development."
+    },
+    {
+        image: "https://imgs.search.brave.com/qR255R_pMbMeR6A80wBdQ2ZX6j7G8XMmdnaehdEOcAo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/d2lrLmNvbS9jb250/ZW50L3VwbG9hZHMv/aW1hZ2VzLzczMV9q/YXZhLmpwZw",
+        title: "Java Logo",
+        details: "The official logo for the Java programming language, featuring a stylized coffee cup with rising steam, often in shades of blue and orange. Java is a class-based, object-oriented programming language designed to have as few implementation dependencies as possible, making it platform-independent."
+    },
+    {
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1200px-Go_Logo_Blue.svg.png",
+        title: "Go Logo",
+        details: "The logo for the Go programming language (also known as Golang). It's a simple and modern design featuring the word 'Go' in a clean, sans-serif blue font with stylized streaks suggesting speed and efficiency. Go is a statically typed, compiled language designed at Google for building scalable and performant software."
+    },
+    {
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/800px-PHP-logo.svg.png",
+        title: "PHP Logo",
+        details: "The logo for PHP: Hypertext Preprocessor. It's a stylized wordmark 'php' often enclosed in a rounded rectangle and typically in shades of purple and blue. PHP is a widely-used open-source scripting language especially suited for web development and can be embedded into HTML."
+    },
+    {
+        image: "https://imgs.search.brave.com/I_i66vdON1X4A3dmdmYi1BRKNQ86bOBXy_y1yrPJ6mU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy9i/L2JkL0xvZ29fQ19z/aGFycC5zdmc",
+        title: "C# Logo (.NET)",
+        details: "The logo for the .NET platform, which is heavily associated with the C# programming language. It features a stylized purple square with rounded corners and a white dot in the center connected by a line. C# is a modern, object-oriented programming ."
+    },
+    {
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/800px-Tux.png",
+        title: "Linux Logo (Tux)",
+        details: "While not strictly a programming language, Tux is the official mascot of the Linux kernel. This friendly penguin is widely recognized in the open-source community and often associated with development on Linux platforms, which are popular for various."
+    },
+    {
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/512px-.NET_Core_Logo.svg.png",
+        title: ".NET Logo (Platform)",
+        details: "The logo for the .NET development platform (formerly .NET Core). It's a stylized purple square with rounded corners and a white dot in the center connected by a line. .NET is a free, cross-platform, open-source developer platform for building many ."
+    }
+];
+
+     let btn1 = document.getElementById('btn1');
+     let btn2 = document.getElementById('btn2');
+     let show = document.getElementById('show');
+     let output="";
+     btn1.onclick=()=>{
         output = "";
         courses.forEach(course => {
             output += `
@@ -95,10 +315,10 @@
         });
         show.innerHTML = output;
         output = "";
-    }
-    btn1.onclick=()=>{
-        show.innerHTML = "";
-    }
-</Script>
-
+     }
+     btn2.onclick=()=>{
+        output = "";
+        show.innerHTML = output;
+     }
+</script>
 </html>
